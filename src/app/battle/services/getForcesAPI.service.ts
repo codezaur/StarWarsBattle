@@ -8,7 +8,7 @@ export class GetForcesAPIService {
     constructor(private http: HttpClient) {}
 
 
-    async getForces() {
+    async getForces(randomNumber: number) {
         const options: {} = {
             headers: new HttpHeaders({
             Accept: 'application/json',
@@ -18,9 +18,7 @@ export class GetForcesAPIService {
         };
 
         const res = await this.http
-            .get(`https://swapi.co/api/starships/9/`, options).toPromise();
-        console.log('resp in API service:');
-        console.log(res);
+            .get(`https://swapi.co/api/people/${randomNumber}`, options).toPromise();
         return res;
     }
 }

@@ -12,7 +12,12 @@
 
   <section class="battle__forces">
     <mat-card *ngFor="let item of forces">
-      <mat-card-title>{{item.name}}</mat-card-title>
+      <mat-card-title>
+        <h2>{{item.name}}</h2>
+        <mat-card-content>
+          <p>{{item.resources.name}}</p>
+        </mat-card-content>
+      </mat-card-title>
     </mat-card>
   </section>
 </div>

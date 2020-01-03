@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { GetForcesAPIService } from './services/getForcesAPI.service';
+import { GetForcesService } from './services/getForces.service';
 
 
 @Component({
@@ -10,14 +10,20 @@ import { GetForcesAPIService } from './services/getForcesAPI.service';
 })
 export class BattleComponent implements OnInit {
 
+  forces: any[] = [ {name: 'Player 1', resources: {}},
+                    {name: 'Player 2',  resources: {}} ];
 
-  forces: any[] = [{name: 'Player 1'}, {name: 'Player 2'}];
-
-  constructor(private getForcesAPIService: GetForcesAPIService) { }
+  constructor(private getForcesService: GetForcesService) { }
 
   async getPlayersForces() {
-    console.log('calling...');
-    await this.getForcesAPIService.getForces();
+    try {
+      await this.getForcesService.getForces();
+
+      this.forces[0].resources = this.getForcesService.player1Forces;
+      this.forces[1].resources = this.getForcesService.player2Forces;
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   ngOnInit() {
