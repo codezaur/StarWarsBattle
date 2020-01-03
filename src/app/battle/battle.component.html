@@ -1,0 +1,18 @@
+<div class="battle">
+
+  <section class="battle__intro">
+    <div>
+      <button mat-button
+        (click)="getPlayersForces()">
+        <mat-icon>record_voice_over</mat-icon>
+        Call reinforcement!
+    </button>
+    </div>
+  </section>
+
+  <section class="battle__forces">
+    <mat-card *ngFor="let item of forces">
+      <mat-card-title>{{item.name}}</mat-card-title>
+    </mat-card>
+  </section>
+</div>
