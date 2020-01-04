@@ -1,3 +1,17 @@
-<p>
-  options works!
-</p>
+<section class="options">
+  <div class="options__container">
+    <div class="options__container__call-to-action">Select battle units type: </div>
+
+    <div *ngFor="let item of battleTypes"
+         class="options__container__item"
+         [class.selected]="item.name===selectedBattleType"
+         (click)="setBattleType(item.name)"
+         >
+      <p>{{item.name}}</p>
+      <div class="options__container__item__photo">
+        <img src="../../assets/photos/{{item.photo}}.png" alt="battle type photo">
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { OptionsService } from './services/options.service';
+
 @Component({
   selector: 'app-options',
   templateUrl: './options.component.html',
@@ -7,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OptionsComponent implements OnInit {
 
-  constructor() { }
+  battleTypes: any[] = [ {name: 'species', photo: 'species'},
+                         {name: 'people', photo: 'vader'}];
+  selectedBattleType: string = 'species';
+
+  constructor(private optionsService: OptionsService) { }
+
+  setBattleType(type: string): void {
+    this.selectedBattleType = type;
+    this.optionsService.setBattleType(type);
+  }
 
   ngOnInit() {
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { GetForcesService } from './services/getForces.service';
+import { OptionsService } from '../options/services/options.service'
 
 
 @Component({
@@ -13,11 +14,16 @@ export class BattleComponent implements OnInit {
   forces: any[] = [ {name: 'Player 1', resources: {}},
                     {name: 'Player 2',  resources: {}} ];
 
-  constructor(private getForcesService: GetForcesService) { }
+  selectedBattleType: string;
+
+  constructor(private getForcesService: GetForcesService,
+              private optionsService: OptionsService) { }
 
   async getPlayersForces() {
+    this.selectedBattleType = this.optionsService.getBattleType();
+
     try {
-      await this.getForcesService.getForces();
+      await this.getForcesService.getForces(this.selectedBattleType);
 
       this.forces[0].resources = this.getForcesService.player1Forces;
       this.forces[1].resources = this.getForcesService.player2Forces;

@@ -11,13 +11,25 @@ export class GetForcesService {
 
     constructor(private getForcesAPIService: GetForcesAPIService) {}
 
-    pickRandomNumber() {
-      const newRandom = Math.floor(Math.random() * 8) + 1;
+    pickRandomNumber(battleType: string) {
+
+      let numberOfItems: number;
+      if (battleType === 'people') {
+        numberOfItems = 88;
+      } else if (battleType === 'vehicles') {
+        numberOfItems = 40;
+      } else if (battleType === 'starships') {
+        numberOfItems = 38;
+      } else if (battleType === 'species') {
+        numberOfItems = 38;
+      }
+
+      const newRandom = Math.floor(Math.random() * numberOfItems) + 1;
 
       if (this.randomNumber !== newRandom) {
         this.randomNumber = newRandom;
       } else {
-        this.pickRandomNumber();
+        this.pickRandomNumber(battleType);
       }
     }
 
@@ -25,13 +37,16 @@ export class GetForcesService {
       return JSON.parse(resources.body);
     }
 
-    async getForces() {
+    async getNewForces(battleType: string): Promise<object> {
+      this.pickRandomNumber(battleType);
+      const forces = await this.getForcesAPIService.getForces(this.randomNumber, battleType);
+      return forces;
+    }
 
-      this.pickRandomNumber();
-      const forces1 = await this.getForcesAPIService.getForces(this.randomNumber);
+    async getForces(battleType: string) {
 
-      this.pickRandomNumber();
-      const forces2 = await this.getForcesAPIService.getForces(this.randomNumber);
+      const forces1 = await this.getNewForces(battleType);
+      const forces2 = await this.getNewForces(battleType);
 
       this.player1Forces = this.prepareForcesObject(forces1);
       this.player2Forces =  this.prepareForcesObject(forces2);
