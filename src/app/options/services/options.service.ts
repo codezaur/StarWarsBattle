@@ -15,5 +15,12 @@ export class OptionsService {
       return this.battleType;
     }
 
+    getWiningConditions(battleType: string): any[] {
+      if (battleType === 'species') {
+        return ['average_height', 'average_lifespan', 'films.length'];
+      } else if (battleType === 'people') {
+        return ['mass', 'height', 'starships.length', 'films.length'];
+      }
 
+    }
 }

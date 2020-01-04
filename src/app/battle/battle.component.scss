@@ -2,4 +2,10 @@
 
 .battle__forces {
   display: flex;
+  .player {
+    flex: 0 0 47%;
+  }
+  .winner {
+    border: 1px solid red;
+  }
 }

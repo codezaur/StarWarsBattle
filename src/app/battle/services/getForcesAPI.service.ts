@@ -8,7 +8,7 @@ export class GetForcesAPIService {
     constructor(private http: HttpClient) {}
 
 
-    async getForces(randomNumber: number, battleType: string) {
+    async getForces(randomNumber: number, battleType: string): Promise<object> {
         const options: {} = {
             headers: new HttpHeaders({
             Accept: 'application/json',
@@ -17,12 +17,8 @@ export class GetForcesAPIService {
             responseType: 'text'
         };
 
-        try {
-          const res = await this.http
+        const res = await this.http
           .get(`https://swapi.co/api/${battleType}/${randomNumber}`, options).toPromise();
-          return res;
-        } catch (err) {
-          return err;
-        }
+        return res;
     }
 }

@@ -6,12 +6,10 @@ import { GetForcesAPIService } from './getForcesAPI.service';
 export class GetForcesService {
 
     randomNumber: number;
-    player1Forces: {};
-    player2Forces: {};
 
     constructor(private getForcesAPIService: GetForcesAPIService) {}
 
-    pickRandomNumber(battleType: string) {
+    pickRandomNumber(battleType: string): void {
 
       let numberOfItems: number;
       if (battleType === 'people') {
@@ -33,7 +31,7 @@ export class GetForcesService {
       }
     }
 
-    prepareForcesObject(resources: any) {
+    prepareForcesObject(resources: any): object {
       return JSON.parse(resources.body);
     }
 
@@ -43,17 +41,18 @@ export class GetForcesService {
       return forces;
     }
 
-    async getForces(battleType: string) {
+    async getForces(battleType: string): Promise<object> {
 
       const forces1 = await this.getNewForces(battleType);
       const forces2 = await this.getNewForces(battleType);
 
-      this.player1Forces = this.prepareForcesObject(forces1);
-      this.player2Forces =  this.prepareForcesObject(forces2);
+      const forces1Obj: object = this.prepareForcesObject(forces1);
+      const forces2Obj: object =  this.prepareForcesObject(forces2);
 
       console.log('players in GF service: ');
-      console.log(this.player1Forces);
-      console.log(this.player2Forces);
+      console.log(forces1Obj);
+      console.log(forces2Obj);
 
+      return [forces1Obj, forces2Obj];
     }
 }

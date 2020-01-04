@@ -3,7 +3,7 @@
   <section class="battle__intro">
     <div>
       <button mat-button
-        (click)="getPlayersForces()">
+        (click)="startBattle()">
         <mat-icon>record_voice_over</mat-icon>
         Call reinforcement!
     </button>
@@ -11,13 +11,35 @@
   </section>
 
   <section class="battle__forces">
-    <mat-card *ngFor="let item of forces">
+    <mat-card
+      *ngFor="let item of forces"
+      class="player"
+      [class.winner]="item.isWinner">
       <mat-card-title>
         <h2>{{item.name}}</h2>
-        <mat-card-content>
-          <p>{{item.resources.name}}</p>
-        </mat-card-content>
       </mat-card-title>
+      <mat-card-content *ngIf="selectedBattleType==='species' && forces[0].resources.url">
+        <p>name: {{item.resources.name}}</p>
+        <p>classification: {{item.resources.classification}}</p>
+        <p>designation: {{item.resources.designation}}</p>
+        <p>average height: {{item.resources.average_height}}</p>
+        <p>average lifespan: {{item.resources.average_lifespan}}</p>
+        <p>fame: {{item.resources.films.length || ''}}</p>
+        <p>skin colors: {{item.resources.skin_colors}}</p>
+        <p>eye colors: {{item.resources.eye_colors}}</p>
+      </mat-card-content>
+      <mat-card-content *ngIf="selectedBattleType==='people' && forces[0].resources.url">
+        <p>name: {{item.resources.name}}</p>
+        <p>mass: {{item.resources.mass}}</p>
+        <p>height: {{item.resources.height}}</p>
+        <p>combat experience: {{item.resources.starships.length || ''}}</p>
+        <p>fame: {{item.resources.films.length}}</p>
+        <p>gender: {{item.resources.gender}}</p>
+        <p>hair color: {{item.resources.hair_color}}</p>
+        <p>skin color: {{item.resources.skin_color}}</p>
+        <p>eye color: {{item.resources.eye_color}}</p>
+      </mat-card-content>
+
     </mat-card>
   </section>
 </div>

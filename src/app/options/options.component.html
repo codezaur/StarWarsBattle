@@ -7,7 +7,7 @@
          [class.selected]="item.name===selectedBattleType"
          (click)="setBattleType(item.name)"
          >
-      <p>{{item.name}}</p>
+      <p class="options__container__item__text">{{item.name}} vs {{item.name}} </p>
       <div class="options__container__item__photo">
         <img src="../../assets/photos/{{item.photo}}.png" alt="battle type photo">
       </div>
