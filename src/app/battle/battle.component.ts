@@ -15,35 +15,56 @@ export class BattleComponent implements OnInit {
 
   selectedBattleType: string;
 
+  battleResults: object | string;
+
+  battleResolved: boolean;
+
+  comparedFactor: string | number;
+
   constructor(private getForcesService: GetForcesService,
               private optionsService: OptionsService) { }
 
-  determineWinner(battleType: string) {
+  determineWinner(battleType: string): object | string {
 
-    const winningFactor = this.optionsService.getWiningConditions(battleType)[0];
+    const winningFactors = this.optionsService.getWiningConditions(battleType);
+
     let winner: any;
-    let forces1 = parseInt(this.forces[0].resources[winningFactor], 10);
-    let forces2 = parseInt(this.forces[1].resources[winningFactor], 10);
+    let forces1: number;
+    let forces2: number;
 
-    console.log('WINNER IS: ... ');
-    console.log(winningFactor);
-    console.log(this.forces[0].resources[winningFactor]);
-    console.log(this.forces[1].resources[winningFactor]);
+    for (let factor of winningFactors) {
 
-    if ( isNaN(forces1) || isNaN(forces2) ) {
-      winner = 'Could not resolve battle';
-    } else if (forces1 === forces2) {
-      winner = 'dead heat';
-    } else if (forces1 > forces2) {
-      winner = this.forces[0];
-    } else if (forces1 < forces2) {
-      winner = this.forces[1];
+      if (factor === 'films.length') {
+        forces1 = parseInt(this.forces[0].resources.films.length, 10);
+        forces2 = parseInt(this.forces[1].resources.films.length, 10);
+        this.comparedFactor = this.forces[0].resources.films.length;
+      } else {
+        forces1 = parseInt(this.forces[0].resources[factor], 10);
+        forces2 = parseInt(this.forces[1].resources[factor], 10);
+        this.comparedFactor = this.forces[0].resources[factor];
+      }
+
+      if ( isNaN(forces1) || isNaN(forces2) ) {
+        winner = `These two couldn't fight and battle could't be resolved. \
+                  Try again - call reinforcement.`;
+        this.battleResolved = false;
+      } else if (forces1 === forces2) {
+        winner = `Dead heat. These two forces seem to be equally strong. \
+                  Try again - call reinforcement.`;
+        this.battleResolved = false;
+      } else if (forces1 > forces2) {
+        winner = this.forces[0];
+        winner.isWinner = true;
+        this.battleResolved = true;
+        return winner;
+      } else if (forces1 < forces2) {
+        winner = this.forces[1];
+        winner.isWinner = true;
+        this.battleResolved = true;
+        return winner;
+      }
     }
-
-    winner.isWinner = true;
-    console.log(winner);
     return winner;
-
   }
 
   async startBattle() {
@@ -55,7 +76,7 @@ export class BattleComponent implements OnInit {
       this.forces[0].resources = newForces[0];
       this.forces[1].resources = newForces[1];
 
-      this.determineWinner(this.selectedBattleType);
+      this.battleResults = this.determineWinner(this.selectedBattleType);
 
 
     } catch (err) {

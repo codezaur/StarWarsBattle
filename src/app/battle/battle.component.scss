@@ -1,11 +1,56 @@
 
+.battle__intro {
+  padding-top: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .battle__intro__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px 10%;
+    width: 20%;
+    .battle__intro__container__btn {
+      border: 1px solid #303f9f;
+      border-radius: 10px;
+      .btn__action {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.battle__info {
+  .battle__info__text {
+    text-align: center;
+  }
+}
 
 .battle__forces {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   .player {
-    flex: 0 0 47%;
+    flex: 0 0 25%;
+    margin: 5px;
+    .player__info {
+      text-align: center;
+      .player__info__name {
+        margin: 0;
+      }
+    }
+    .player__content {
+      .compared {
+       color: #303f9f;
+       font-weight: bold;
+       font-size: 120%;
+       text-decoration: wavy;
+      }
+    }
   }
   .winner {
-    border: 1px solid red;
+    border: 1px solid #303f9f;
+    box-shadow: 0px 0px 15px 0px #303f9f;
   }
 }
