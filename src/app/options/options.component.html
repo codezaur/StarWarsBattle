@@ -1,17 +1,33 @@
 <section class="options">
-  <div class="options__container">
-    <div class="options__container__call-to-action">Select battle type: </div>
-
+  <div class="options__battle-type">
+    <div class="options__battle-type__call-to-action">Select battle type: </div>
     <div *ngFor="let item of battleTypes"
-         class="options__container__item"
+         class="options__battle-type__item"
          [class.selected]="item.name===selectedBattleType"
          (click)="setBattleType(item.name)"
          >
-      <p class="options__container__item__text">{{item.name}} vs {{item.name}} </p>
-      <div class="options__container__item__photo">
+      <p class="options__battle-type__item__text">{{item.name}} vs {{item.name}} </p>
+      <div class="options__battle-type__item__photo">
         <img src="../../assets/photos/{{item.photo}}.png" alt="battle type photo">
       </div>
     </div>
 
+    <div class="options__rules">
+      <div (click)="toggleWinningOptions()"
+           class="options__rules__call-to-action">
+           Set winning conditions:
+          <mat-icon *ngIf="showWinningOptions==null">keyboard_arrow_right</mat-icon>
+          <mat-icon *ngIf="showWinningOptions!==null">keyboard_arrow_left</mat-icon>
+      </div>
+      <div *ngIf="showWinningOptions!==null"
+          [class.animateFadeIn]="showWinningOptions"
+          [class.animateFadeOut]="!showWinningOptions">
+        <ul>
+          <li *ngFor="let item of winningOptions">{{item}}</li>
+        </ul>
+
+      </div>
+    </div>
   </div>
+
 </section>

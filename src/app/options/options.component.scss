@@ -1,26 +1,30 @@
-.options__container {
+.options {
   display: flex;
-  justify-content: center;
-  // justify-content: flex-start;
+  flex-direction: column;
   border-bottom: 1px solid #000;
   padding-bottom: 5px;
+}
 
-  .options__container__call-to-action {
+.options__battle-type {
+  display: flex;
+  justify-content: center;
+
+  .options__battle-type__call-to-action {
     align-self: center;
     margin-right: 10px;
   }
-  .options__container__item {
+  .options__battle-type__item {
     cursor: pointer;
     margin: 0 10px;
     padding: 5px;
     border: 1px solid #303f9f;
     border-radius: 10px;
 
-    .options__container__item__text {
+    .options__battle-type__item__text {
       margin: 5px 0;
     }
 
-    .options__container__item__photo {
+    .options__battle-type__item__photo {
 
       img {
         height: 50px;
@@ -38,8 +42,38 @@
   }
 
   .selected {
-
     background-color: #9fa8da;
+  }
+}
+
+.options__rules {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .options__rules__call-to-action {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .hidden {
+    display: none;
+  }
+  .animateFadeIn {
+    animation: fadeIn 400ms ease-out 0s;
+  }
+  .animateFadeOut {
+    animation: fadeOut 400ms ease-in 0s;
+  }
+
+  @keyframes fadeIn {
+    0% {transform: translateX(200%);}
+    100% {transform: translateX(0%);}
+  }
+  @keyframes fadeOut {
+    0% {transform: translateX(0%);}
+    100% {transform: translateX(200%);}
   }
 
 }
