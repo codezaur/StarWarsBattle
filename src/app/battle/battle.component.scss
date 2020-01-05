@@ -1,6 +1,7 @@
 
 .battle__intro {
   padding-top: 2%;
+  margin-bottom: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,6 +40,36 @@
       .player__info__name {
         margin: 0;
       }
+    }
+    .player__loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .player__score {
+      text-align: center;
+      font-size: 100%;
+      font-weight: 600;
+      margin: 0 auto 15px;
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      .player__score__data {
+        margin: 0;
+        line-height: 100%;
+        display: flex;
+        align-items: center;
+        align-self: center;
+        mat-icon {
+          margin-left: 10px;
+        }
+      }
+      .player__score__data:last-child {
+        border-bottom: 1px solid #303f9f;
+        padding-bottom: 10px;
+      }
+
     }
     .player__content {
       .compared {

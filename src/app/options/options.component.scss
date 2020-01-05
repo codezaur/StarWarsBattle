@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #000;
-  padding-bottom: 5px;
+  padding: 15px 0;
+  // background-color: #1a237e;
 }
 
 .options__battle-type {
@@ -57,14 +58,32 @@
     cursor: pointer;
   }
 
+  .options__rules__list {
+    list-style-type: none;
+    padding: 0;
+    width: 90%;
+    .options__rules__item {
+      display: flex;
+      .options__rules__item__label {
+        margin-right: 5px;
+        margin-right: auto;
+      }
+      // .options__rules__item__checkbox {
+
+      // }
+    }
+  }
+
   .hidden {
     display: none;
   }
   .animateFadeIn {
     animation: fadeIn 400ms ease-out 0s;
+    width: 100%;
   }
   .animateFadeOut {
     animation: fadeOut 400ms ease-in 0s;
+    width: 100%;
   }
 
   @keyframes fadeIn {

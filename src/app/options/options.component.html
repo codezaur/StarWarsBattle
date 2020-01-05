@@ -19,14 +19,23 @@
           <mat-icon *ngIf="showWinningOptions==null">keyboard_arrow_right</mat-icon>
           <mat-icon *ngIf="showWinningOptions!==null">keyboard_arrow_left</mat-icon>
       </div>
+
       <div *ngIf="showWinningOptions!==null"
           [class.animateFadeIn]="showWinningOptions"
           [class.animateFadeOut]="!showWinningOptions">
-        <ul>
-          <li *ngFor="let item of winningOptions">{{item}}</li>
+        <ul class="options__rules__list">
+          <li *ngFor="let item of winningOptions, let i = index" class="options__rules__item">
+            <label class="options__rules__item__label">{{item.name |factor}}</label>
+            <mat-checkbox
+            class="options__rules__item__checkbox"
+            [checked]="item.isApplied===true"
+            (change)="handleCheckboxClicks(item, i)"
+            >
+            </mat-checkbox>
+          </li>
         </ul>
-
       </div>
+
     </div>
   </div>
 

@@ -4,8 +4,9 @@
     <div class="battle__intro__container">
       <button mat-button class="battle__intro__container__btn"
         (click)="startBattle()">
-        <p class="btn__action">Call reinforcement!</p>
-        <mat-icon>record_voice_over</mat-icon>
+        <p  *ngIf="!battleResults" class="btn__action">Start a battle!</p>
+        <p *ngIf="battleResults" class="btn__action">Call for reinforcement!</p>
+        <mat-icon>flash_on</mat-icon>
     </button>
     </div>
   </section>
@@ -14,6 +15,10 @@
     <p  class="battle__info__text"
         *ngIf="!battleResolved">
         {{battleResults}}
+    </p>
+    <p class="battle__info__text" *ngIf="error.msg">Apologies.
+      Disturbance in the Force stopped units from reaching battlefield.<br />
+      Try again.
     </p>
   </section>
 
@@ -24,26 +29,38 @@
       [class.winner]="item.isWinner">
       <mat-card-title class="player__info">
         <h2 class="player__info__name">{{item.name}}</h2>
-
       </mat-card-title>
+
+      <div *ngIf="waitingForAPIResponse" class="player__loader">
+        <p>Using Force to bring in troops...</p>
+        <mat-spinner></mat-spinner>
+      </div>
+
+      <div *ngIf="item.score && !waitingForAPIResponse" class="player__score">
+        <p *ngIf="item.isWinner" class="player__score__data" >Winner! <mat-icon>tag_faces</mat-icon> </p>
+        <p class="player__score__data">score: {{item.score}}</p>
+      </div>
+
       <mat-card-content
-        *ngIf="selectedBattleType==='species' && forces[0].resources.url"
+        *ngIf="selectedBattleType==='species' && forces[0].resources.url && !waitingForAPIResponse"
         class="player__content">
         <p>name: {{item.resources.name}}</p>
         <p>classification: {{item.resources.classification}}</p>
         <p>designation: {{item.resources.designation}}</p>
-        <p [class.compared]="comparedFactor===item.resources.average_height">average height: {{item.resources.average_height}}</p>
-        <p [class.compared]="comparedFactor===item.resources.average_lifespan">average lifespan: {{item.resources.average_lifespan}}</p>
-        <p [class.compared]="comparedFactor===item.resources.films.length">fame: {{item.resources.films.length || ''}}</p>
+        <p [ngClass]="{'compared': comparedFactor==='average_height'}">average height: {{item.resources.average_height}}</p>
+        <p [ngClass]="{'compared': comparedFactor==='average_lifespan'}">average lifespan: {{item.resources.average_lifespan}}</p>
+        <p [ngClass]="{'compared': 'comparedFactor===films.length'}">fame: {{item.resources.films.length || ''}}</p>
       </mat-card-content>
       <mat-card-content
-        *ngIf="selectedBattleType==='people' && forces[0].resources.url"
+        *ngIf="selectedBattleType==='people' && forces[0].resources.url && !waitingForAPIResponse"
         class="player__content">
         <p>name: {{item.resources.name}}</p>
-        <p [class.compared]="comparedFactor===item.resources.mass">mass: {{item.resources.mass}}</p>
-        <p [class.compared]="comparedFactor===item.resources.height">height: {{item.resources.height}}</p>
-        <p [class.compared]="comparedFactor===item.resources.starships.length">combat experience: {{item.resources.starships.length || ''}}</p>
-        <p [class.compared]="comparedFactor===item.resources.films.length">fame: {{item.resources.films.length}}</p>
+        <p [ngClass]="{'compared': comparedFactor==='mass'}">mass: {{item.resources.mass}}</p>
+        <p [ngClass]="{'compared': comparedFactor==='height'}">height: {{item.resources.height}}</p>
+        <p [ngClass]="{'compared': comparedFactor==='starships.length'}">
+            combat experience: {{item.resources.starships.length || 'unknown'}}
+        </p>
+        <p [ngClass]="{'compared': comparedFactor==='films.length'}">fame: {{item.resources.films.length}}</p>
         <p>gender: {{item.resources.gender}}</p>
         <p>hair color: {{item.resources.hair_color}}</p>
       </mat-card-content>

@@ -19,19 +19,28 @@ export class OptionsComponent implements OnInit {
   constructor(private optionsService: OptionsService) { }
 
   setBattleType(type: string): void {
-    console.log(type);
     this.selectedBattleType = type;
     this.optionsService.setBattleType(type);
   }
 
-  toggleWinningOptions() {
+  toggleWinningOptions(): void {
     this.showWinningOptions = this.showWinningOptions === (false || null) ? true : false;
 
-    this.winningOptions = this.optionsService.getWiningConditions(this.selectedBattleType);
+    if (this.showWinningOptions) {
+      this.winningOptions = this.optionsService.getWiningConditions(this.selectedBattleType);
+    }
 
     if (this.showWinningOptions === false) {
       setTimeout(() => { this.showWinningOptions = null; }, 400); }
   }
+
+  handleCheckboxClicks(factor: boolean, index: number) {
+    this.winningOptions[index].isApplied = this.winningOptions[index].isApplied === false ? true : false;
+    console.log(this.winningOptions);
+    this.optionsService.setWinningConditions(this.winningOptions, this.selectedBattleType);
+  }
+
+
 
   ngOnInit() {
   }

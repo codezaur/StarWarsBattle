@@ -5,6 +5,14 @@ export class OptionsService {
 
     battleType: string = 'species';
 
+    winningConditions = {species: [{name: 'average_height', isApplied: true},
+                                    {name: 'average_lifespan', isApplied: true},
+                                    {name: 'films.length', isApplied: true} ],
+                        people:   [{name: 'mass', isApplied: true},
+                                   {name: 'height', isApplied: true},
+                                   {name: 'starships.length', isApplied: true},
+                                   {name: 'films.length', isApplied: true}] };
+
     constructor() {}
 
     setBattleType(type: string): void {
@@ -15,12 +23,11 @@ export class OptionsService {
       return this.battleType;
     }
 
-    getWiningConditions(battleType: string): any[] {
-      if (battleType === 'species') {
-        return ['average_height', 'average_lifespan', 'films.length'];
-      } else if (battleType === 'people') {
-        return ['mass', 'height', 'starships.length', 'films.length'];
-      }
+    setWinningConditions(conditions: any[], battleType: string) {
+      this.winningConditions[battleType] = conditions;
+    }
 
+    getWiningConditions(battleType: string): any[] {
+      return this.winningConditions[battleType];
     }
 }
