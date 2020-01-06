@@ -1,27 +1,16 @@
-# SwBattle
+# Star Wars Battles
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.8.
+This project was made with use of Star Wars API (https://swapi.co/) and generated with version 7.3.8.
 
-## Development server
+## To run on you local server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Fork repo. In your fork press 'Clone or Download', then in terminal `git clone` + copied URL
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
-## Code scaffolding
+## Game mechanics
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Game will get two random heros or species from  API, and declare one of them winner basing on given criteria.
+For each battle type (person vs person or speciec vs species) there are set of criteria. 
+I will check them one be one in order they're displayed in 'Set winning conditions' section. 
+If one of heroes/species is stronger regarding to current factor, it declares him/her a winner, and end round, if their forces are equal or undefined, it moves to next criteria. If it cannot find winned after checking all criteria, it declares dead heat (equal forces) or battle not taking place (undefined values). 
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
