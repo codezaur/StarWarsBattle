@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { OptionsService } from './services/options.service';
 
@@ -7,7 +7,7 @@ import { OptionsService } from './services/options.service';
   templateUrl: './options.component.html',
   styleUrls: ['./options.component.scss']
 })
-export class OptionsComponent implements OnInit {
+export class OptionsComponent {
 
   battleTypes: any[] = [ {name: 'species', photo: 'species'},
                          {name: 'people', photo: 'vader'}];
@@ -38,9 +38,6 @@ export class OptionsComponent implements OnInit {
   handleCheckboxClicks(index: number) {
     this.winningOptions[index].isApplied = this.winningOptions[index].isApplied === false ? true : false;
     this.optionsService.setWinningConditions(this.winningOptions, this.selectedBattleType);
-  }
-
-  ngOnInit() {
   }
 
 }

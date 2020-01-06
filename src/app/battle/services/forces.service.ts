@@ -49,10 +49,6 @@ export class ForcesService {
       const forces1Obj: object = this.prepareForcesObject(forces1);
       const forces2Obj: object =  this.prepareForcesObject(forces2);
 
-      console.log('players in GF service: ');
-      console.log(forces1Obj);
-      console.log(forces2Obj);
-
       return [forces1Obj, forces2Obj];
     }
 }
