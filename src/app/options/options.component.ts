@@ -37,7 +37,6 @@ export class OptionsComponent implements OnInit {
 
   handleCheckboxClicks(index: number) {
     this.winningOptions[index].isApplied = this.winningOptions[index].isApplied === false ? true : false;
-    console.log(this.winningOptions);
     this.optionsService.setWinningConditions(this.winningOptions, this.selectedBattleType);
   }
 

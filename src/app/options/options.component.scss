@@ -3,12 +3,12 @@
   flex-direction: column;
   border-bottom: 1px solid #000;
   padding: 15px 0;
-  // background-color: #1a237e;
 }
 
 .options__battle-type {
   display: flex;
   justify-content: center;
+  padding-left: 10px;
 
   .options__battle-type__call-to-action {
     align-self: center;
@@ -67,6 +67,7 @@
       .options__rules__item__label {
         margin-right: 5px;
         margin-right: auto;
+        text-align: left;
       }
       // .options__rules__item__checkbox {
 

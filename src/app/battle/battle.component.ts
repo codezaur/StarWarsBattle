@@ -35,8 +35,6 @@ export class BattleComponent implements OnInit {
     let forces2: number;
 
     for (const factor of factors) {
-      console.log('FORCES');
-      console.log(this.forces);
 
       this.comparedFactor = factor.name;
 
