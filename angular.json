@@ -41,6 +41,7 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "baseHref": "/sw-battle/",
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
