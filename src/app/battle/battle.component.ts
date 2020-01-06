@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { GetForcesService } from './services/getForces.service';
-import { OptionsService } from '../options/services/options.service'
+import { ForcesService } from './services/forces.service';
+import { OptionsService } from '../options/services/options.service';
 
 
 @Component({
@@ -25,22 +25,20 @@ export class BattleComponent implements OnInit {
 
   waitingForAPIResponse: boolean = false;
 
-  constructor(private getForcesService: GetForcesService,
+  constructor(private forcesService: ForcesService,
               private optionsService: OptionsService) { }
 
-  determineWinner(battleType: string): object | string {
-
-    let winningFactors = this.optionsService.getWiningConditions(battleType);
-    winningFactors = winningFactors.filter(item => item.isApplied === true);
+  compareForces(factors: any[]): object | string {
 
     let winner: any;
     let forces1: number;
     let forces2: number;
 
-    for (const factor of winningFactors) {
+    for (const factor of factors) {
+      console.log('FORCES');
+      console.log(this.forces);
 
       this.comparedFactor = factor.name;
-      console.log(this.comparedFactor);
 
       if (factor.name === 'films.length') {
         forces1 = parseInt(this.forces[0].resources.films.length, 10);
@@ -75,6 +73,14 @@ export class BattleComponent implements OnInit {
     return winner;
   }
 
+  determineWinner(battleType: string): object | string {
+
+    let winningFactors = this.optionsService.getWiningConditions(battleType);
+    winningFactors = winningFactors.filter(item => item.isApplied === true);
+
+    return this.compareForces(winningFactors);
+  }
+
 
   clearGameData() {
     this.forces.forEach( (force) => force.isWinner = false);
@@ -91,7 +97,7 @@ export class BattleComponent implements OnInit {
     this.selectedBattleType = this.optionsService.getBattleType();
 
     try {
-      const newForces: object = await this.getForcesService.getForces(this.selectedBattleType);
+      const newForces: object = await this.forcesService.getForces(this.selectedBattleType);
 
       this.forces[0].resources = newForces[0];
       this.forces[1].resources = newForces[1];
@@ -103,9 +109,6 @@ export class BattleComponent implements OnInit {
       this.error.msg = err.error;
       this.waitingForAPIResponse = false;
     }
-
-    console.log('is factor fame: ' + this.comparedFactor === 'films.length');
-    console.log(this.comparedFactor);
   }
 
 

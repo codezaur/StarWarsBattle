@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 
-import { GetForcesAPIService } from './getForcesAPI.service';
+import { ForcesAPIService } from './forcesAPI.service';
 
 @Injectable({providedIn: 'root'})
-export class GetForcesService {
+export class ForcesService {
 
     randomNumber: number;
 
-    constructor(private getForcesAPIService: GetForcesAPIService) {}
+    constructor(private forcesAPIService: ForcesAPIService) {}
 
     pickRandomNumber(battleType: string): void {
 
@@ -37,7 +37,7 @@ export class GetForcesService {
 
     async getNewForces(battleType: string): Promise<object> {
       this.pickRandomNumber(battleType);
-      const forces = await this.getForcesAPIService.getForces(this.randomNumber, battleType);
+      const forces = await this.forcesAPIService.getForces(this.randomNumber, battleType);
       return forces;
     }
 

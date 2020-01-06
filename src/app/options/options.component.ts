@@ -31,16 +31,15 @@ export class OptionsComponent implements OnInit {
     }
 
     if (this.showWinningOptions === false) {
-      setTimeout(() => { this.showWinningOptions = null; }, 400); }
+      setTimeout(() => { this.showWinningOptions = null; }, 400);
+    }
   }
 
-  handleCheckboxClicks(factor: boolean, index: number) {
+  handleCheckboxClicks(index: number) {
     this.winningOptions[index].isApplied = this.winningOptions[index].isApplied === false ? true : false;
     console.log(this.winningOptions);
     this.optionsService.setWinningConditions(this.winningOptions, this.selectedBattleType);
   }
-
-
 
   ngOnInit() {
   }
