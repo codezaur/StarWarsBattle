@@ -49,7 +49,7 @@
         <p>designation: {{item.resources.designation}}</p>
         <p [ngClass]="{'compared': comparedFactor==='average_height'}">average height: {{item.resources.average_height}}</p>
         <p [ngClass]="{'compared': comparedFactor==='average_lifespan'}">average lifespan: {{item.resources.average_lifespan}}</p>
-        <p [ngClass]="{'compared': 'comparedFactor===films.length'}">fame: {{item.resources.films.length || ''}}</p>
+        <p [ngClass]="{'compared': comparedFactor==='films.length'}">fame: {{item.resources.films.length || ''}}</p>
       </mat-card-content>
       <mat-card-content
         *ngIf="selectedBattleType==='people' && forces[0].resources.url && !waitingForAPIResponse"
