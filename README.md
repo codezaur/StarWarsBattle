@@ -14,6 +14,6 @@ Game will get two random heros or species from  API, and declare one of them win
 For each battle type (person vs person or speciec vs species) there are set of winning criteria. 
 It will check them one be one in order they're displayed in 'Set winning conditions' section. 
 
-If one of heroes/species is stronger regarding to current factor, it declares him/her a winner, and end round, if their forces are equal or undefined, it moves to next criteria. 
+If one of heroes/species is stronger regarding to current factor, it declares him/her a winner, and ends round. If their forces are equal or undefined, it moves to next criteria. 
 If it cannot find winned after checking all criteria, it declares dead heat (equal forces) or battle not taking place (undefined values). 
 
