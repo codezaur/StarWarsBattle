@@ -28,7 +28,7 @@ export class BattleComponent implements OnInit {
   constructor(private forcesService: ForcesService,
               private optionsService: OptionsService) { }
 
-  handleBattleWinner(player1Won: boolean) {
+  handleBattleWinner(player1Won: boolean): object {
     const winner = player1Won ? this.forces[0] : this.forces[1];
     winner.isWinner = true;
     winner.score = winner.score + 1 || 1;
@@ -79,13 +79,13 @@ export class BattleComponent implements OnInit {
   }
 
 
-  clearGameData() {
+  clearGameData(): void {
     this.forces.forEach( (force) => force.isWinner = false);
     this.comparedFactor = '';
     this.error = {msg: ''};
   }
 
-  async startBattle() {
+  async startBattle(): Promise<object> {
 
     this.clearGameData();
 
@@ -101,10 +101,12 @@ export class BattleComponent implements OnInit {
 
       this.waitingForAPIResponse = false;
       this.battleResults = this.determineWinner(this.selectedBattleType);
+      return newForces;
 
     } catch (err) {
       this.error.msg = err.error;
       this.waitingForAPIResponse = false;
+      return err;
     }
   }
 
@@ -113,7 +115,7 @@ export class BattleComponent implements OnInit {
     this.initiateForcesArray();
   }
 
-  initiateForcesArray() {
+  initiateForcesArray(): void {
     this.forces = [
       {name: 'Player 1', resources: {films: [], starships: []}},
       {name: 'Player 2',  resources: {films: [], starships: []}} ];

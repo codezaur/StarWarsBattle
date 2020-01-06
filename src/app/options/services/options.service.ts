@@ -23,7 +23,7 @@ export class OptionsService {
       return this.battleType;
     }
 
-    setWinningConditions(conditions: any[], battleType: string) {
+    setWinningConditions(conditions: any[], battleType: string): void {
       this.winningConditions[battleType] = conditions;
     }
 
