@@ -49,6 +49,9 @@ export class BattleComponent implements OnInit {
       if (factor.name === 'films.length') {
         forces1 = parseInt(this.forces[0].resources.films.length, 10);
         forces2 = parseInt(this.forces[1].resources.films.length, 10);
+      } else if (factor.name === 'starships.length') {
+        forces1 = parseInt(this.forces[0].resources.starships.length, 10);
+        forces2 = parseInt(this.forces[1].resources.starships.length, 10);
       } else {
         forces1 = parseInt(this.forces[0].resources[factor.name], 10);
         forces2 = parseInt(this.forces[1].resources[factor.name], 10);
