@@ -28,6 +28,14 @@ export class BattleComponent implements OnInit {
   constructor(private forcesService: ForcesService,
               private optionsService: OptionsService) { }
 
+  handleBattleWinner(player1Won: boolean) {
+    const winner = player1Won ? this.forces[0] : this.forces[1];
+    winner.isWinner = true;
+    winner.score = winner.score + 1 || 1;
+    this.battleResolved = true;
+    return winner;
+  }
+
   compareForces(factors: any[]): object | string {
 
     let winner: any;
@@ -54,17 +62,8 @@ export class BattleComponent implements OnInit {
         winner = `Dead heat. These two seem to be equall in force. \
                   Try again - call reinforcement.`;
         this.battleResolved = false;
-      } else if (forces1 > forces2) {
-        winner = this.forces[0];
-        winner.isWinner = true;
-        winner.score = winner.score + 1 || 1;
-        this.battleResolved = true;
-        return winner;
-      } else if (forces1 < forces2) {
-        winner = this.forces[1];
-        winner.isWinner = true;
-        winner.score = winner.score + 1 || 1;
-        this.battleResolved = true;
+      } else {
+        winner = this.handleBattleWinner(forces1 > forces2);
         return winner;
       }
     }
