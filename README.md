@@ -1,6 +1,6 @@
 # Star Wars Battles
 
-This project was made with use of Star Wars API (https://swapi.co/) and generated with version 7.3.8.
+This project was made with use of Star Wars API (https://swapi.co/) and generated with Angular version 7.3.8.
 
 ## To run on you local server
 
