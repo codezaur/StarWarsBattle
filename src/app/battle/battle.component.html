@@ -58,7 +58,7 @@
         <p [ngClass]="{'compared': comparedFactor==='mass'}">mass: {{item.resources.mass}}</p>
         <p [ngClass]="{'compared': comparedFactor==='height'}">height: {{item.resources.height}}</p>
         <p [ngClass]="{'compared': comparedFactor==='starships.length'}">
-            combat experience: {{item.resources.starships.length || 'unknown'}}
+            combat experience: {{item.resources.starships.length || '0'}}
         </p>
         <p [ngClass]="{'compared': comparedFactor==='films.length'}">fame: {{item.resources.films.length}}</p>
         <p>gender: {{item.resources.gender}}</p>
