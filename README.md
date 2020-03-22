@@ -15,5 +15,5 @@ For each battle type (person vs person or species vs species) there is set of wi
 It will check them one by one in order they're displayed in 'Set winning conditions' section. 
 
 If one of heroes/species is stronger regarding to current factor, it declares him/her a winner, and ends round. If their forces are equal or undefined, it moves to next criteria. 
-If it cannot find winned after checking all criteria, it declares dead heat (for equal values) or battle not taking place (for undefined values). 
+If it cannot find winner after checking all criteria, it declares dead heat (for equal values) or battle not taking place (for undefined values). 
 
